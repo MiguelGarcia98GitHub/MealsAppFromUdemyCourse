@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MealsOverViewScreen from "./screens/MealsOverviewScreen";
 // import * as React from "react";
+import MealDetailScreen from "./screens/MealDetailsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ export default function App() {
         <Stack.Screen
           name="MealsCategories"
           component={CategoriesScreen}
+          // DIFFERENT OPTIONS FOR NAVIGATION SCREEN:
           // options={{
           //   title: "All Categories",
           //   headerStyle: {
@@ -26,8 +28,14 @@ export default function App() {
           //   },
           //   headerTintColor: "white",
           // }}
+          // options={({ route, navigation }) => {
+          //   return {
+          //     title: route.params.categoryId,
+          //   };
+          // }}
         />
         <Stack.Screen name="MealsOverview" component={MealsOverViewScreen} />
+        <Stack.Screen name="MealDetails" component={MealDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

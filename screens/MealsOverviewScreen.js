@@ -1,9 +1,20 @@
 import { View, Text, StyleSheet, FlatList } from "react-native";
-import { MEALS } from "../data/dummy-data";
+import { MEALS, CATEGORIES } from "../data/dummy-data";
 import MealItem from "../components/MealItem";
+import { useEffect } from "react";
 
-export default function MealsOverViewScreen({ route }) {
+export default function MealsOverViewScreen({ route, navigation }) {
   const catId = route.params.categoryId;
+
+  useEffect(() => {
+    const categoryTitle = CATEGORIES.find(
+      (category) => category.id === catId
+    ).title;
+
+    navigation.setOptions({
+      title: categoryTitle,
+    });
+  }, [catId, navigation]);
 
   const displayedMeals = MEALS.filter((mealItem) => {
     return mealItem.categoryIds.indexOf(catId) >= 0;
@@ -13,6 +24,7 @@ export default function MealsOverViewScreen({ route }) {
     const item = itemData.item;
 
     const mealItemProps = {
+      id: item.id,
       title: item.title,
       imageURL: item.imageUrl,
       affordability: item.affordability,
